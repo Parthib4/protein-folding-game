@@ -1,0 +1,2 @@
+document.addEventListener("DOMContentLoaded",()=>{if(document.querySelector("script[data-injected-viewer]"))return;const e=document.createElement("script");e.type="module",e.src="/index.js",e.setAttribute("data-injected-viewer","1"),document.body.appendChild(e)});
+//# sourceMappingURL=main.af12acaa.js.map

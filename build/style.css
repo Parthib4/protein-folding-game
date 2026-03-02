@@ -1,0 +1,19 @@
+:root{
+  --bg:#071025; --panel:#0f1724; --mut:#9fb3d9;
+}
+*{box-sizing:border-box}
+html,body{height:100%; margin:0; font-family:Inter, Arial, sans-serif; background:var(--bg); color:#e6eef8}
+.app { display:grid; grid-template-columns: 1fr 360px; gap:12px; height:100vh; padding:12px; }
+.viewer { border-radius:10px; background: linear-gradient(180deg,#081026,#0b1230); position:relative; overflow:hidden; }
+.panel { background: rgba(255,255,255,0.03); border-radius:10px; padding:12px; height:calc(100vh - 24px); box-sizing:border-box; overflow:auto; }
+h1{ margin:0 0 8px 0; font-size:18px; color:#bfe1ff; }
+label{ display:block; font-size:13px; color:#cfe6ff; margin-top:10px; }
+.row{ display:flex; gap:8px; align-items:center; margin-top:8px; flex-wrap:wrap; }
+button{ background:#1f3a68; color:#fff; border:none; padding:8px 10px; border-radius:6px; cursor:pointer }
+button.secondary{ background:#2b446e; }
+.small{ font-size:12px; color:#a9c7e6 }
+.stat{ font-family:monospace; font-size:13px; margin-top:6px; color:#dbeeff }
+.controls-block{ margin-top:10px; }
+footer{ margin-top:12px; font-size:12px; color:var(--mut) }
+.total { font-weight:700; font-size:16px; color: #7ef2c0; margin-top:8px }
+#viewer canvas{ display:block }
