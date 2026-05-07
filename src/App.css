@@ -1,0 +1,202 @@
+:root{
+  --bg:#071025; --panel:#0f1724; --mut:#9fb3d9;
+}
+*{box-sizing:border-box}
+body { margin:0; font-family:Inter, Arial, sans-serif; background:var(--bg); color:#e6eef8; }
+.app-root { display:flex; height:100vh; gap:14px; padding:14px; }
+.viewer { flex:1; border-radius:10px; background: linear-gradient(180deg,#081026,#0b1230); position:relative; overflow:hidden; }
+.panel { width:380px; background: rgba(255,255,255,0.03); border-radius:10px; padding:12px; overflow:auto; }
+h1{ margin:0 0 8px 0; font-size:18px; color:#bfe1ff }
+label{ font-size:13px; display:block; margin-top:8px; color:#cfe6ff }
+.row{ display:flex; gap:8px; align-items:center; margin-top:8px; flex-wrap:wrap }
+button{ background:#1f3a68; color:#fff; border:none; padding:8px 10px; border-radius:6px; cursor:pointer; transition: background 0.15s }
+button:hover{ background:#2a4d80 }
+button:disabled{ opacity:0.5; cursor:not-allowed }
+button.secondary{ background:#2b446e }
+button.secondary:hover{ background:#3a5580 }
+.small{ font-size:12px; color:#a9c7e6 }
+.stat{ font-family:monospace; font-size:13px; margin-top:6px; color:#dbeeff }
+input[type="range"]{ width:100% }
+input[type="number"]{ padding:6px; border-radius:6px; background:#071026; color:#e6eef8; border:1px solid #21324a }
+footer{ margin-top:10px; font-size:12px; color:var(--mut) }
+.file-input{ margin-top:6px }
+.controls-block{ margin-top:10px }
+.smallbtn{ padding:6px 8px; font-size:13px }
+
+/* ---- Protein/Ligand Chooser ---- */
+.chooser-block { border: 1px solid #1a2744; border-radius:8px; padding:10px; background: rgba(0,170,255,0.03); }
+.preset-list { display:flex; flex-direction:column; gap:4px; margin-top:6px; max-height:200px; overflow-y:auto; }
+.preset-list::-webkit-scrollbar { width: 5px; }
+.preset-list::-webkit-scrollbar-thumb { background: #2a4060; border-radius: 4px; }
+
+.preset-btn {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:8px 12px; background: rgba(15,23,36,0.8);
+  border:1px solid #1a2744; border-radius:6px;
+  cursor:pointer; transition: all 0.2s; text-align:left;
+  color:#e6eef8;
+}
+.preset-btn:hover {
+  border-color:#00aaff; background:rgba(0,170,255,0.08);
+  box-shadow: 0 0 12px rgba(0,170,255,0.1);
+}
+.preset-name { font-size:13px; font-weight:600; }
+.preset-id { font-size:11px; color:#5580aa; font-family:monospace; }
+
+.loading-indicator {
+  margin-top:6px; font-size:12px; color:#00aaff;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+/* ---- Residue Tooltip (on hover) ---- */
+.residue-tooltip {
+  position:absolute; top:14px; left:14px; z-index:10;
+  background:rgba(8,16,38,0.92); border:1px solid #1a2744;
+  border-radius:8px; padding:8px 12px;
+  display:flex; flex-direction:column; gap:3px;
+  pointer-events:none; backdrop-filter: blur(4px);
+}
+.residue-tooltip strong { font-size:15px; color:#fff; letter-spacing:0.5px; }
+.residue-tooltip span { font-size:12px; color:#8aaccc; }
+
+/* ---- Secondary Structure Badges ---- */
+.ss-badge {
+  display:inline-block; padding:2px 8px; border-radius:4px;
+  font-size:11px; font-weight:600; letter-spacing:0.5px; text-transform:uppercase;
+}
+.ss-helix { background:rgba(255,68,68,0.25); color:#ff6666; border:1px solid rgba(255,68,68,0.3); }
+.ss-sheet { background:rgba(68,136,255,0.25); color:#6699ff; border:1px solid rgba(68,136,255,0.3); }
+.ss-loop  { background:rgba(255,169,77,0.25); color:#ffa94d; border:1px solid rgba(255,169,77,0.3); }
+
+/* ---- Structure Legend ---- */
+.legend-block { border:1px solid #1a2744; border-radius:8px; padding:10px; background: rgba(0,170,255,0.02); }
+
+.structure-summary {
+  display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; margin-bottom:8px;
+}
+.summary-tag {
+  font-size:11px; padding:3px 8px; border-radius:4px;
+  font-weight:600; letter-spacing:0.3px;
+}
+.helix-tag { background:rgba(255,68,68,0.2); color:#ff6666; }
+.sheet-tag { background:rgba(68,136,255,0.2); color:#6699ff; }
+.loop-tag  { background:rgba(255,169,77,0.2); color:#ffa94d; }
+.chain-tag { background:rgba(100,200,100,0.2); color:#88cc88; }
+
+.legend-list {
+  max-height:180px; overflow-y:auto; display:flex; flex-direction:column; gap:2px;
+}
+.legend-list::-webkit-scrollbar { width:4px; }
+.legend-list::-webkit-scrollbar-thumb { background:#2a4060; border-radius:4px; }
+
+.legend-item {
+  display:flex; align-items:center; gap:6px;
+  padding:3px 6px; border-radius:4px;
+  font-size:12px; color:#c0d4e8;
+  transition: background 0.15s;
+}
+.legend-item:hover { background:rgba(255,255,255,0.04); }
+
+.legend-swatch {
+  width:12px; height:12px; border-radius:3px;
+  flex-shrink:0; border: 1px solid rgba(255,255,255,0.1);
+}
+.legend-label { font-weight:600; min-width:60px; }
+.legend-range { font-size:11px; color:#7a9ab5; font-family:monospace; }
+.legend-count { font-size:11px; color:#556a80; }
+
+/* ---- Preset Ligand Badges ---- */
+.preset-left {
+  display:flex; align-items:center; gap:6px;
+}
+.preset-btn.has-ligand {
+  border-left: 3px solid #00ff88;
+}
+.ligand-badge {
+  font-size:9px; font-weight:700; letter-spacing:0.8px;
+  padding:2px 6px; border-radius:3px;
+  background:rgba(0,255,136,0.15); color:#00ff88;
+  border:1px solid rgba(0,255,136,0.3);
+  text-transform:uppercase;
+}
+
+/* ---- Ligand Info Panel ---- */
+.ligand-panel {
+  border:1px solid rgba(0,255,136,0.3); border-radius:8px;
+  padding:10px; background:rgba(0,255,136,0.04);
+  animation: ligandFadeIn 0.3s ease-out;
+}
+@keyframes ligandFadeIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+.ligand-header {
+  display:flex; justify-content:space-between; align-items:center;
+}
+.ligand-header label {
+  margin:0; font-weight:700; color:#00ff88; font-size:13px;
+}
+.ligand-toggle {
+  padding:4px 10px; font-size:11px; border-radius:4px;
+  background:rgba(0,255,136,0.2); color:#00ff88;
+  border:1px solid rgba(0,255,136,0.3);
+}
+.ligand-toggle:hover { background:rgba(0,255,136,0.3); }
+.ligand-toggle.secondary { background:rgba(100,100,120,0.3); color:#8899aa; border-color:#445566; }
+.ligand-toggle.secondary:hover { background:rgba(100,100,120,0.4); }
+.ligand-details {
+  display:flex; justify-content:space-between; align-items:center;
+  margin-top:6px; padding:4px 0;
+}
+.ligand-name {
+  font-size:14px; font-weight:600; color:#e6eef8; font-family:monospace;
+}
+.ligand-atoms {
+  font-size:12px; color:#88ccaa; background:rgba(0,255,136,0.08);
+  padding:2px 8px; border-radius:4px;
+}
+.ligand-elements {
+  display:flex; gap:4px; flex-wrap:wrap; margin-top:6px;
+}
+.element-chip {
+  font-size:11px; font-weight:700; padding:2px 7px; border-radius:3px;
+  font-family:monospace; letter-spacing:0.5px;
+  border:1px solid rgba(255,255,255,0.1);
+}
+
+/* ---- Protein Lighting Controls ---- */
+.lighting-block { border: 1px solid #1a2744; border-radius:8px; padding:10px; background: rgba(100,140,255,0.03); }
+.lighting-block label.small { margin-top:6px; color:#8aaccc; font-size:11px; }
+.lighting-block input[type="range"] { margin-top:2px; }
+.lighting-block .small { font-size:11px; color:#6688aa; margin-bottom:2px; }
+
+/* ---- PyMOL Export Button ---- */
+.pymol-export-btn {
+  width:100%; margin-top:6px; padding:10px 14px;
+  background: linear-gradient(135deg, #1a3a5c, #244a70);
+  border:1px solid #3a6a9a; border-radius:6px;
+  color:#c0e0ff; font-size:13px; font-weight:600;
+  cursor:pointer; transition: all 0.2s;
+  letter-spacing:0.3px;
+}
+.pymol-export-btn:hover {
+  background: linear-gradient(135deg, #244a70, #2e5a84);
+  border-color:#5090cc;
+  box-shadow: 0 0 14px rgba(80,144,204,0.2);
+  color:#fff;
+}
+
+/* ---- Mobile Responsive ---- */
+@media (max-width: 768px) {
+  .app-root { flex-direction: column; height: auto; min-height: 100vh; padding: 8px; gap: 8px; }
+  .viewer { height: 55vh; min-height: 280px; flex: none; }
+  .panel { width: 100%; max-height: none; }
+  .preset-list { max-height: 150px; }
+  .legend-list { max-height: 130px; }
+}
+
+@media (max-width: 480px) {
+  .app-root { padding: 6px; gap: 6px; }
+  .viewer { height: 50vh; min-height: 240px; }
+  h1 { font-size: 15px; }
+  button { padding: 7px 8px; font-size: 12px; }
+  .panel { padding: 8px; }
+}
